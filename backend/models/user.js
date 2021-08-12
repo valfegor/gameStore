@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const jwt = requiere("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const moment = require("moment");
 

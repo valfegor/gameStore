@@ -6,6 +6,8 @@ const cors = require('cors');
 
 const Role = require("./routes/roleroutes");
 
+const User = require("./routes/userrouters");
+
 const app = express();
 
 app.use(express.json());
@@ -13,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/role",Role);
+app.use("/api/user",User);
 
 //importamos nuestra coneccion a la bd.
 
