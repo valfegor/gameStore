@@ -31,8 +31,11 @@ const registerSale = async (req,res) =>{
 
     const precio_exacto = (product.price * parseInt(req.body.quantity) );
 
+    if(stock_real<=0) return res.status(400).send("Sorry you have to add more stock you are in 0");
     stock.quantity = stock_real;
     
+
+
 
 
     const sale = new Sale({ 
