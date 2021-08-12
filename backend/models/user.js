@@ -16,9 +16,9 @@ const userSchema = new mongoose.Schema({
 });
 
 //seguridad.
-
 userSchema.methods.generateJWT = function(){
-    return jwt.sing({
+
+    return jwt.sign({
         _id:this._id,
         name:this.name,
         iat:moment().unix(),
