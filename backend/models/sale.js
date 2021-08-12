@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 
 const salesSchema = new mongoose.Schema({
+    quantity:Number,
+    location:String,
     name_product:String,
     name_seller:String,
     id_product:{ type: mongoose.Schema.ObjectId, ref: "product"},

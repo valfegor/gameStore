@@ -4,10 +4,11 @@ const Product = require("../models/product");
 
 const User = require("../models/user");
 
+const Stock = require("../models/stock");
 
 const registerSale = async (req,res) =>{
     
-    if(!req.body.name_product || !req.body.price || !req.body.name_seller) return res.status(400).send("Sorry Check the camps please");
+    if(!req.body.name_product || !req.body.price || !req.body.name_seller || !req.body.quantity || !req.body.location) return res.status(400).send("Sorry Check the camps please");
 
     const product = await Product.findOne({name:req.body.name_product});
 
@@ -17,14 +18,22 @@ const registerSale = async (req,res) =>{
 
     if(!user) return res.status(400).send("Sorry the vendor not exist");
 
-    console.log(user._id);
+    
+
+    const precio_exacto = (product.price * parseInt(req.body.quantity) );
+
+    
+    
+
 
     const sale = new Sale({
+        quantity:req.body.quantity,
+        location:req.body.location,
         name_product:req.body.name_product,
         name_seller:req.body.name_seller,
         id_product:product._id,
         id_user:user._id,
-        price:req.body.price,
+        price:precio_exacto,
     })
 
 

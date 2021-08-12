@@ -2,6 +2,7 @@ const Stock = require("../models/stock");
 
 const Product = require("../models/product");
 
+const Sale = require("../models/sale");
 //funciones flechas
 
 const registerStock = async (req,res) =>{
@@ -16,10 +17,14 @@ const registerStock = async (req,res) =>{
 
     if(!product) return res.status(400).send("no product registred with that name please checkout the name");
 
-    console.log(product.name);
+    const sale = await Sale.findOne({location:req.body.location});
+
+    console.log(sale.quantity);
+
+    let stock_real = (parseInt(req.body.quantity)-sale.quantity);
 
     const stock = new Stock({
-        quantity:req.body.quantity,
+        quantity:stock_real,
         location:req.body.location,
         id_product:product._id
     })
