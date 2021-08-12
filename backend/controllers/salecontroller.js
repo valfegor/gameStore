@@ -4,7 +4,10 @@ const Product = require("../models/product");
 
 const User = require("../models/user");
 
+
 const Stock = require("../models/stock");
+
+const mongoose = require("mongoose");
 
 const registerSale = async (req,res) =>{
     
@@ -18,15 +21,21 @@ const registerSale = async (req,res) =>{
 
     if(!user) return res.status(400).send("Sorry the vendor not exist");
 
+    const stock = await Stock.findOne({location:req.body.location});
     
+    console.log(stock.quantity);
+
+    const stock_real = (stock.quantity - parseInt(req.body.quantity));
+
+    console.log(stock_real);
 
     const precio_exacto = (product.price * parseInt(req.body.quantity) );
 
-    
+    stock.quantity = stock_real;
     
 
 
-    const sale = new Sale({
+    const sale = new Sale({ 
         quantity:req.body.quantity,
         location:req.body.location,
         name_product:req.body.name_product,
@@ -38,6 +47,7 @@ const registerSale = async (req,res) =>{
 
 
     let result = sale.save();
+    stock.save();
 
     if(!result) return res.status(400).send("cant save try again")
 

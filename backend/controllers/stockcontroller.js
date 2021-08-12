@@ -3,28 +3,25 @@ const Stock = require("../models/stock");
 const Product = require("../models/product");
 
 const Sale = require("../models/sale");
+
+const mongoose = require('mongoose');
 //funciones flechas
 
 const registerStock = async (req,res) =>{
 
     if(!req.body.quantity || !req.body.location || !req.body.name) return res.status(400).send("Please check all the camps");
 
-    const existingLocation = await Stock.findOne({location:req.body.location});
-
-    if(existingLocation) return res.status(400).send("Sorrry you have already one location");
 
     const product = await Product.findOne({name:req.body.name});
 
     if(!product) return res.status(400).send("no product registred with that name please checkout the name");
 
-    const sale = await Sale.findOne({location:req.body.location});
+    
 
-    console.log(sale.quantity);
-
-    let stock_real = (parseInt(req.body.quantity)-sale.quantity);
+    
 
     const stock = new Stock({
-        quantity:stock_real,
+        quantity:req.body.quantity,
         location:req.body.location,
         id_product:product._id
     })
