@@ -12,9 +12,9 @@ const registerStock = async (req,res) =>{
 
     if(existingLocation) return res.status(400).send("Sorrry you have already one location");
 
-    const product = await Product.findOne({name:"resident evil 6"});
+    const product = await Product.findOne({name:req.body.name});
 
-    if(req.body.name != product.name) return res.status(400).send("no match");
+    if(!product) return res.status(400).send("no match");
 
     console.log(product.name);
 
