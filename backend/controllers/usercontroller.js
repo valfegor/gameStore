@@ -27,7 +27,7 @@ const registerUser = async (req,res) =>{
 
     //buscamos si tiene o no un rol asignado.
 
-    let existingRole = Role.find({name:"vendor"});
+    let existingRole = await Role.find({name:"vendor"});
 
     //si no encuentra el rol asignado
     if(!existingRole) return res.status(400).send("No rol asignated please create the rol first");
