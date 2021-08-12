@@ -22,6 +22,31 @@ const registerRole = async (req,res) =>{
     const role = new Role ({
         name:req.body.name,
         description:req.body.description,
+        dbstatus = true,
     });
 
+
+    //guardando el json.
+
+    const result = role.save();
+
+    if(!result) return res.status(400).send("Sorry try again");
+
+
+    return res.status(200).send("We save your product succesfully");
+
+
+
 }
+
+
+const listRole = async (req,res) =>{
+    let role = await Role.find();
+
+    if(!role) return res.status(400).send("Sorry cant find any role");
+
+    return res.status(200).send({role});
+}
+
+//Exportamos nuestras funciones
+module.exports(registerRole,listRole);
