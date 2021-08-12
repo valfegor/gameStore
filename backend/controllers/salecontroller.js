@@ -38,7 +38,7 @@ const registerSale = async (req,res) =>{
 
 
 const listSale = async (req,res) =>{
-    let sale = await Sale.find()
+    let sale = await Sale.find({name_product: new RegExp(req.params["name_product"],"i")}).populate("id_product").exec();
     if(!sale || sale.length === 0) return res.status(401).send("No users created yet");
 
     return res.status(200).send({sale});
