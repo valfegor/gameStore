@@ -9,6 +9,8 @@ const registerProduct = async (req,res) =>{
     const existingName = await Product.findOne({name:req.body.name});
     //si existe el codigo
 
+    if(existingCode && existingName) return res.status(400).send("Sorry both code and name are already established");
+
     if(existingCode)return res.status(400).send("Sorry you have already one code stablished");
 
     if(existingName)return res.status(400).send("Sorry already one product with these name");
