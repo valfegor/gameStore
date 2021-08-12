@@ -14,7 +14,7 @@ const registerStock = async (req,res) =>{
 
     const product = await Product.findOne({name:req.body.name});
 
-    if(!product) return res.status(400).send("no match");
+    if(!product) return res.status(400).send("no product registred with that name please checkout the name");
 
     console.log(product.name);
 
