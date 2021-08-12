@@ -37,6 +37,13 @@ const registerSale = async (req,res) =>{
 }
 
 
-module.exports={registerSale}
+const listSale = async (req,res) =>{
+    let sale = await Sale.find({name: new RegExp(req.params["name"],"i")}).populate("id_product").exec();
+    if(!sale || sale.length === 0) return res.status(401).send("No users created yet");
+
+    return res.status(200).send({sale});
+}
+
+module.exports={registerSale,listSale}
 
 
