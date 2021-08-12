@@ -8,6 +8,8 @@ const Role = require("./routes/roleroutes");
 
 const User = require("./routes/userrouters");
 
+const Product = require("./routes/productroutes");
+
 const app = express();
 
 app.use(express.json());
@@ -16,6 +18,7 @@ app.use(cors());
 
 app.use("/api/role",Role);
 app.use("/api/user",User);
+app.use("/api/product",Product);
 
 //importamos nuestra coneccion a la bd.
 
